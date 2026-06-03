@@ -25,12 +25,12 @@ public class User {
         this.creditos = this.creditos.add(amount);
     }
 
-    public void gastarCredits(int amount) {
+    public void gastarCreditos(int amount) {
         this.creditos = this.creditos.subtract(amount);
     }
 
     public boolean temCreditospara(int cost) {
-        return creditos.Suficientepara(cost);
+        return creditos.SuficientePara(cost);
     }
 
     public void desativar() {

@@ -30,7 +30,7 @@ public final class Creditos {
         return new Creditos(this.amount - value);
     }
 
-    public boolean Suficientepara(int cost) {
+    public boolean SuficientePara(int cost) {
         return this.amount >= cost;
     }
 

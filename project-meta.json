@@ -1,0 +1,13 @@
+{
+  "curso": "Ciências da Computação",
+  "disciplina": "Projeto de Programação",
+  "tema_escolhido": "4",
+  "linguagem": "Java",
+  "gerenciador_dependencias": "Maven",
+  "integrantes": [
+    {"nome": "Carlos Cavalcante Felix Carnauba Moura", "github_username": "CarlosCvlnt"},
+    {"nome": "Josué dos Santos Lourenço", "github_username": "JosueLourenco"},
+    {"nome": "Pedro Henrique Campos de Andrade", "github_username": "peuhx"},
+    {"nome": "Ruan Guilherme Silva Acioly", "github_username": "Ruan-GS"}
+  ]
+}
