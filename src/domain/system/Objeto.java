@@ -1,18 +1,19 @@
 package domain.system;
 import java.util.ArrayList;
 import java.util.List;
+import domain.user.*;
 
 public class Objeto {
 
     String tipo;
-    String dono;
+    User dono;
     String nome;
     int valor;
 
-    public Objeto(String tipo, String dono, String nome) {
+    public Objeto(String tipo, User dono, String nome) {
         this.tipo = tipo;
-        this.dono = dono;
         this.nome = nome;
+        this.dono = dono;
 
         this.valor = decidirValor(tipo);
     }
@@ -32,13 +33,33 @@ public class Objeto {
         }
     }
 
+    public String getTipo(){
+        return tipo;
+    }
+
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+
     public static class registrarobj {
 
         List<Objeto> objetos = new ArrayList<>();
 
-        public void adicionarObjeto(String tipo, String dono, String nome) {
+        public void adicionarObjeto(String tipo, User dono, String nome) {
             Objeto obj = new Objeto(tipo, dono, nome);
             objetos.add(obj);
         }
+    }
+
+    public String MostrarDetalhes(){
+        return String.format("Categoria: %s | Nome: %s", getTipo(), getNome());
     }
 }
