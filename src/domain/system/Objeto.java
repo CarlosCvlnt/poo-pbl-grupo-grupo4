@@ -5,40 +5,15 @@ import domain.user.*;
 
 public class Objeto {
 
-    String tipo;
-    User dono;
-    String nome;
-    int valor;
+
+    private String nome;
+    private ItemId itemid;
+    private Categoria tipo;
 
     public Objeto(String tipo, User dono, String nome) {
-        this.tipo = tipo;
+        this.itemid = ItemId.generate();
+        this.tipo = new Categoria(tipo);
         this.nome = nome;
-        this.dono = dono;
-
-        this.valor = decidirValor(tipo);
-    }
-
-    private int decidirValor(String tipo) {
-        if (tipo.equalsIgnoreCase("livro")) {
-            return 250;
-        }
-        if (tipo.equalsIgnoreCase("brinquedo")) {
-            return 150;
-        }
-        if (tipo.equalsIgnoreCase("eletronico")) {
-            return 500;
-        }
-        else {
-            return 0;
-        }
-    }
-
-    public String getTipo(){
-        return tipo;
-    }
-
-    public void setTipo(String tipo){
-        this.tipo = tipo;
     }
 
     public String getNome(){
@@ -60,6 +35,6 @@ public class Objeto {
     }
 
     public String MostrarDetalhes(){
-        return String.format("Categoria: %s | Nome: %s", getTipo(), getNome());
+        return String.format("Categoria: %s | Nome: %s", tipo.getTipo(), getNome());
     }
 }
