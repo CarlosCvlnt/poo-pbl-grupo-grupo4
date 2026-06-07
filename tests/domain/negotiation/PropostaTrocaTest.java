@@ -65,4 +65,60 @@ public class PropostaTrocaTest {
                 proposta.getStatus()
         );
     }
+
+    @Test
+    void deveRejeitarProponenteNulo() {
+
+        User destinatario =
+                new User("Maria", Email.of("maria@email.com"));
+
+        assertThrows(IllegalArgumentException.class, () ->
+                new PropostaTroca(null, destinatario));
+    }
+
+    @Test
+    void deveRejeitarDestinatarioNulo() {
+
+        User proponente =
+                new User("Pedro", Email.of("pedro@email.com"));
+
+        assertThrows(IllegalArgumentException.class, () ->
+                new PropostaTroca(proponente, null));
+    }
+
+    @Test
+    void deveRejeitarAceitarPropostaJaFinalizada() {
+
+        User proponente =
+                new User("Pedro", Email.of("pedro@email.com"));
+
+        User destinatario =
+                new User("Maria", Email.of("maria@email.com"));
+
+        PropostaTroca proposta =
+                new PropostaTroca(proponente, destinatario);
+
+        proposta.recusar();
+
+        assertThrows(IllegalStateException.class, () ->
+                proposta.aceitar());
+    }
+
+    @Test
+    void deveRejeitarRecusarPropostaJaFinalizada() {
+
+        User proponente =
+                new User("Pedro", Email.of("pedro@email.com"));
+
+        User destinatario =
+                new User("Maria", Email.of("maria@email.com"));
+
+        PropostaTroca proposta =
+                new PropostaTroca(proponente, destinatario);
+
+        proposta.aceitar();
+
+        assertThrows(IllegalStateException.class, () ->
+                proposta.recusar());
+    }
 }
