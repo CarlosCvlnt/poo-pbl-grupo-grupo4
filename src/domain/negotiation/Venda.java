@@ -2,7 +2,6 @@ package domain.negotiation;
 
 import domain.user.User;
 
-// Representa uma transação de venda entre comprador e vendedor
 public class Venda {
 
     private final User comprador;
@@ -10,16 +9,19 @@ public class Venda {
     private final int valor;
 
     public Venda(User comprador, User vendedor, int valor) {
-        if (valor <= 0) throw new IllegalArgumentException("Valor inválido.");
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor inválido.");
+        }
         this.comprador = comprador;
-        this.vendedor  = vendedor;
-        this.valor     = valor;
+        this.vendedor = vendedor;
+        this.valor = valor;
     }
 
     public void realizarVenda() {
-        if (!comprador.temCreditospara(valor))
+        if (!comprador.temCreditospara(valor)) {
             throw new IllegalStateException("Créditos insuficientes.");
-        comprador.gastarCreditos(valor);
-        vendedor.ganharCreditos(valor);
+        }
+        comprador.gastarCreditos(valor); // ← comprador perde
+        vendedor.ganharCreditos(valor);  // ← vendedor ganha ao vender
     }
 }
