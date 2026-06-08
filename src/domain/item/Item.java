@@ -62,8 +62,14 @@ public final class Item {
 
     @Override
     public String toString() {
-        return String.format("Item{nome='%s', categoria=%s, valor=%d, disponivel=%s}",
-                nome, categoria, valorEmCreditos, disponivel);
+        return String.format(
+                "Nome      : %s%n" +
+                        "Descrição : %s%n" +
+                        "Categoria : %s%n" +
+                        "Valor     : %d créditos%n" +
+                        "Disponível: %s",
+                nome, descricao, categoria, valorEmCreditos, disponivel ? "Sim" : "Não"
+        );
     }
 }
 

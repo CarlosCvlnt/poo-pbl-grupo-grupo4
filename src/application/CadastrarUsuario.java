@@ -13,6 +13,7 @@ public class CadastrarUsuario {
 
     public User executar(String nome, String email) {
         User user = new User(nome, Email.of(email));
+        user.ganharCreditos(100); // ← bônus único de cadastro
         repositorio.salvar(user);
         return user;
     }
