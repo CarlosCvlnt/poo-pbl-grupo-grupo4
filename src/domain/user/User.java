@@ -2,6 +2,7 @@ package domain.user;
 
 import java.util.Objects;
 
+// Entidade principal que representa um usuário da plataforma
 public class User {
 
     private final UserId id;
@@ -11,37 +12,25 @@ public class User {
     private boolean active;
 
     public User(String name, Email email) {
-        if (name == null || name.isBlank()) {
+        if (name == null || name.isBlank())
             throw new IllegalArgumentException("Nome do usuário não pode ser vazio.");
-        }
-        this.id      = UserId.generate();
-        this.name    = name.trim();
-        this.email   = Objects.requireNonNull(email, "E-mail é obrigatório.");
+        this.id       = UserId.generate();
+        this.name     = name.trim();
+        this.email    = Objects.requireNonNull(email, "E-mail é obrigatório.");
         this.creditos = Creditos.zero();
-        this.active  = true;
+        this.active   = true;
     }
 
-    public void ganharCreditos(int amount) {
-        this.creditos = this.creditos.add(amount);
-    }
+    public void ganharCreditos(int amount) { this.creditos = this.creditos.add(amount); }
+    public void gastarCreditos(int amount) { this.creditos = this.creditos.subtract(amount); }
+    public boolean temCreditospara(int cost) { return creditos.SuficientePara(cost); }
+    public void desativar()                { this.active = false; }
 
-    public void gastarCreditos(int amount) {
-        this.creditos = this.creditos.subtract(amount);
-    }
-
-    public boolean temCreditospara(int cost) {
-        return creditos.SuficientePara(cost);
-    }
-
-    public void desativar() {
-        this.active = false;
-    }
-
-    public UserId getId()       { return id; }
-    public String getName()     { return name; }
-    public Email getEmail()     { return email; }
+    public UserId getId()        { return id; }
+    public String getName()      { return name; }
+    public Email getEmail()      { return email; }
     public Creditos getCredits() { return creditos; }
-    public boolean isActive()   { return active; }
+    public boolean isActive()    { return active; }
 
     @Override
     public boolean equals(Object o) {
@@ -51,9 +40,7 @@ public class User {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+    public int hashCode() { return Objects.hash(id); }
 
     @Override
     public String toString() {

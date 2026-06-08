@@ -1,23 +1,17 @@
 package domain.user;
 
+// Value object imutável que representa o saldo de créditos de um usuário
 public final class Creditos {
 
     private final int amount;
 
     private Creditos(int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("Créditos não podem ser negativos.");
-        }
+        if (amount < 0) throw new IllegalArgumentException("Créditos não podem ser negativos.");
         this.amount = amount;
     }
 
-    public static Creditos of(int amount) {
-        return new Creditos(amount);
-    }
-
-    public static Creditos zero() {
-        return new Creditos(0);
-    }
+    public static Creditos of(int amount)  { return new Creditos(amount); }
+    public static Creditos zero()          { return new Creditos(0); }
 
     public Creditos add(int value) {
         if (value <= 0) throw new IllegalArgumentException("Valor a adicionar deve ser positivo.");
@@ -30,16 +24,9 @@ public final class Creditos {
         return new Creditos(this.amount - value);
     }
 
-    public boolean SuficientePara(int cost) {
-        return this.amount >= cost;
-    }
-
-    public int quantidadeCredito() {
-        return amount;
-    }
+    public boolean SuficientePara(int cost) { return this.amount >= cost; }
+    public int quantidadeCredito()           { return amount; }
 
     @Override
-    public String toString() {
-        return amount + " créditos";
-    }
+    public String toString() { return amount + " créditos"; }
 }

@@ -1,43 +1,34 @@
 package domain.system;
 
-import javax.smartcardio.Card;
-
 public class Categoria {
 
     private String tipo;
-    private final Integer valorcredito;
+    private int valorCredito;
 
-    public Categoria(String tipo){
+    public Categoria(String tipo) {
         this.tipo = tipo;
-
-        this.valorcredito = decidirValor(tipo);
+        this.valorCredito = calcularValor(tipo);
     }
 
-    private int decidirValor(String tipo) {
-        if (tipo.equalsIgnoreCase("livro")) {
-            return 250;
-        }
-        if (tipo.equalsIgnoreCase("brinquedo")) {
-            return 150;
-        }
-        if (tipo.equalsIgnoreCase("eletronico")) {
-            return 500;
-        }
-        else {
-            return 0;
-        }
+    private int calcularValor(String tipo) {
+        return switch (tipo.toLowerCase()) {
+            case "livro"      -> 250;
+            case "brinquedo"  -> 150;
+            case "eletronico" -> 500;
+            default           -> 0;
+        };
     }
 
-    public String getTipo(){
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo){
+    public void setTipo(String tipo) {
         this.tipo = tipo;
+        this.valorCredito = calcularValor(tipo);
     }
 
-    public Integer getValorcredito(){
-        return valorcredito;
+    public int getValorCredito() {
+        return valorCredito;
     }
-
 }

@@ -1,40 +1,43 @@
 package domain.system;
+
+import domain.user.User;
 import java.util.ArrayList;
 import java.util.List;
-import domain.user.*;
 
 public class Objeto {
 
-
     private String nome;
-    private ItemId itemid;
-    private Categoria tipo;
+    private final ItemId itemId;
+    private Categoria categoria;
+    private final User dono;
 
     public Objeto(String tipo, User dono, String nome) {
-        this.itemid = ItemId.generate();
-        this.tipo = new Categoria(tipo);
-        this.nome = nome;
+        this.itemId    = ItemId.generate();
+        this.categoria = new Categoria(tipo);
+        this.nome      = nome;
+        this.dono      = dono;
     }
 
-    public String getNome(){
-        return nome;
+    public String getNome()       { return nome; }
+    public void setNome(String n) { this.nome = n; }
+    public User getDono()         { return dono; }
+
+    public String mostrarDetalhes() {
+        return String.format("Categoria: %s | Nome: %s | Dono: %s",
+                categoria.getTipo(), nome, dono.getName());
     }
 
-    public void setNome(String nome){
-        this.nome = nome;
-    }
+    // Registro de objetos do sistema
+    public static class RegistroObjetos {
 
-    public static class registrarobj {
-
-        List<Objeto> objetos = new ArrayList<>();
+        private final List<Objeto> objetos = new ArrayList<>();
 
         public void adicionarObjeto(String tipo, User dono, String nome) {
-            Objeto obj = new Objeto(tipo, dono, nome);
-            objetos.add(obj);
+            objetos.add(new Objeto(tipo, dono, nome));
         }
-    }
 
-    public String MostrarDetalhes(){
-        return String.format("Categoria: %s | Nome: %s", tipo.getTipo(), getNome());
+        public List<Objeto> getObjetos() {
+            return objetos;
+        }
     }
 }
